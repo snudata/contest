@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>서울대학교 프로그래밍 경진대회 2024</title>
+    <title>AI Native Campus - 제1회 서울대학교 생성형AI 활용 경진대회</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,11 +13,10 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Noto Sans KR', sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background: #fff;
         }
 
         .container {
@@ -26,14 +26,12 @@
         }
 
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            transition: all 0.3s ease;
         }
 
         nav {
@@ -43,19 +41,53 @@
             padding: 1rem 0;
         }
 
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin-right: 2rem;
+        }
+
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-left: 1rem;
+        }
+
+        .language-toggle button {
+            background: none;
+            border: 1px solid #0F0F70;
+            color: #0F0F70;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .language-toggle button.active {
+            background: #0F0F70;
+            color: white;
+        }
+
+        .language-toggle button:hover {
+            background: #0F0F70;
+            color: white;
+        }
+
         .logo {
             display: flex;
             align-items: center;
             font-size: 1.5rem;
             font-weight: bold;
-            color: #2c3e50;
+            color: #0F0F70;
         }
 
-        .logo img {
-            width: 40px;
-            height: 40px;
+        .logo .snu-logo {
+            width: 160px;
+            height: auto;
             margin-right: 10px;
-            border-radius: 50%;
         }
 
         .nav-links {
@@ -66,294 +98,251 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #2c3e50;
+            color: #333;
             font-weight: 500;
             transition: color 0.3s ease;
-            position: relative;
         }
 
         .nav-links a:hover {
-            color: #667eea;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: #667eea;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+            color: #0F0F70;
         }
 
         .hero {
-            height: 100vh;
+            background: url('경진대회 배경.png') center center no-repeat;
+            background-size: cover;
+            color: white;
+            height: 60vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
+            padding-top: 80px; /* Header offset */
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 1s ease;
         }
 
         .hero p {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             margin-bottom: 2rem;
             opacity: 0.9;
-            animation: fadeInUp 1s ease 0.3s both;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1rem 2rem;
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
+            padding: 0.8rem 2rem;
+            background: #fff;
+            color: #0F0F70;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 5px;
             font-weight: bold;
             font-size: 1.1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-            animation: fadeInUp 1s ease 0.6s both;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+            background: #eee;
         }
 
         .section {
-            padding: 5rem 0;
-            position: relative;
-        }
-
-        .section:nth-child(even) {
-            background: rgba(255, 255, 255, 0.05);
+            padding: 4rem 0;
         }
 
         .section h2 {
             text-align: center;
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: white;
-            position: relative;
-        }
-
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            border-radius: 2px;
+            color: #333;
         }
 
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
 
         .info-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: #fff;
             padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .info-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .info-card:hover::before {
-            left: 100%;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .info-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .info-card h3 {
-            color: #ff6b6b;
+            color: #0F0F70;
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
 
         .info-card p {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.8;
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        #schedule .container {
+            max-width: 800px;
         }
 
         .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-            border-radius: 3px;
+            list-style: none;
         }
 
         .timeline-item {
-            padding: 10px 40px;
+            border-left: 3px solid #0F0F70;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
             position: relative;
-            background-color: inherit;
-            width: 50%;
-            opacity: 0;
-            animation: slideIn 0.6s ease forwards;
         }
-
-        .timeline-item:nth-child(odd) {
-            left: 0;
-            animation-delay: 0.2s;
-        }
-
-        .timeline-item:nth-child(even) {
-            left: 50%;
-            animation-delay: 0.4s;
-        }
-
-        .timeline-item::after {
+        
+        .timeline-item::before {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
-            right: -10px;
-            background: #ff6b6b;
-            border: 4px solid white;
-            top: 15px;
+            left: -11px;
+            top: 1.2rem;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            z-index: 1;
-        }
-
-        .timeline-item:nth-child(even)::after {
-            left: -10px;
-        }
-
-        .timeline-content {
-            padding: 20px 30px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            position: relative;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: #0F0F70;
+            border: 3px solid #fff;
         }
 
         .timeline-content h3 {
-            color: #ff6b6b;
+            color: #0F0F70;
             margin-bottom: 0.5rem;
+            font-size: 1.3rem;
         }
 
         .timeline-content p {
-            color: rgba(255, 255, 255, 0.9);
+            color: #555;
+            font-weight: 500;
+            font-size: 1.1rem;
         }
 
         .prizes {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
 
         .prize-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: #fff;
             padding: 2rem;
-            border-radius: 20px;
+            border-radius: 10px;
             text-align: center;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .prize-card h4 {
+            color: #0F0F70;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
         }
 
-        .prize-card:nth-child(1) {
-            border-color: #ffd700;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-        }
-
-        .prize-card:nth-child(2) {
-            border-color: #c0c0c0;
-            box-shadow: 0 0 30px rgba(192, 192, 192, 0.3);
-        }
-
-        .prize-card:nth-child(3) {
-            border-color: #cd7f32;
-            box-shadow: 0 0 30px rgba(205, 127, 50, 0.3);
-        }
-
-        .prize-card h3 {
-            color: #ff6b6b;
-            font-size: 2rem;
+        .prize-card h5 {
+            color: #0F0F70;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
+            font-weight: normal;
         }
 
         .prize-card .amount {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: bold;
-            color: white;
+            color: #333;
             margin-bottom: 1rem;
+        }
+        
+        .prize-card p {
+            color: #555;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .faq-item {
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+
+        .faq-question h3 {
+            color: #0F0F70;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: #0F0F70;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            color: #555;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        #register .info-card {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
         }
 
         footer {
-            background: rgba(0, 0, 0, 0.8);
+            background: #2c3e50;
             color: white;
             text-align: center;
             padding: 3rem 0;
-            margin-top: 5rem;
+            margin-top: 4rem;
         }
 
         .footer-content {
@@ -361,130 +350,117 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-bottom: 2rem;
+            text-align: left;
         }
 
         .footer-section h3 {
-            color: #ff6b6b;
+            color: #fff;
             margin-bottom: 1rem;
         }
-
-        .contact-info {
+        
+        .footer-section p, .contact-info {
             list-style: none;
+            opacity: 0.8;
         }
 
-        .contact-info li {
-            margin-bottom: 0.5rem;
-            opacity: 0.9;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2); 
+            padding-top: 2rem; 
+            margin-top: 2rem;
+            opacity: 0.8;
         }
 
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                display: none; /* Or implement a hamburger menu */
             }
 
             .hero h1 {
                 font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .timeline::after {
-                left: 31px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-
-            .timeline-item::after {
-                left: 22px;
-            }
-
-            .timeline-item:nth-child(even) {
-                left: 0%;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <nav class="container">
+        <nav class="header-container">
             <div class="logo">
-                <div style="width: 40px; height: 40px; background: linear-gradient(45deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px; color: white; font-weight: bold;">SNU</div>
-                서울대학교 경진대회
+                <img src="1.png" alt="SNU Logo" class="snu-logo">
+                <span data-ko="제1회 서울대학교 생성형 AI 활용 경진대회" data-en="1st Seoul National University Generative AI Competition">제1회 서울대학교 생성형 AI 활용 경진대회</span>
+                <div class="language-toggle">
+                    <button id="lang-ko" class="active" onclick="changeLanguage('ko')">KO</button>
+                    <button id="lang-en" onclick="changeLanguage('en')">EN</button>
+                </div>
             </div>
+            <button class="nav-toggle" aria-label="open navigation">
+                <span class="hamburger"></span>
+            </button>
             <ul class="nav-links">
-                <li><a href="#home">홈</a></li>
-                <li><a href="#about">대회소개</a></li>
-                <li><a href="#schedule">일정</a></li>
-                <li><a href="#prizes">시상</a></li>
-                <li><a href="#register">참가신청</a></li>
-                <li><a href="#contact">문의</a></li>
+                <li><a href="#home" data-ko="홈" data-en="Home">홈</a></li>
+                <li><a href="#about" data-ko="대회소개" data-en="About">대회소개</a></li>
+                <li><a href="#schedule" data-ko="일정" data-en="Schedule">일정</a></li>
+                <li><a href="#prizes" data-ko="시상" data-en="Prizes">시상</a></li>
+                <li><a href="#register" data-ko="참가신청" data-en="Register">참가신청</a></li>
+                <li><a href="#faq" data-ko="FAQ" data-en="FAQ">FAQ</a></li>
+                <li><a href="#contact" data-ko="문의" data-en="Contact">문의</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>SNU Programming Contest 2024</h1>
-            <p>서울대학교 프로그래밍 경진대회</p>
-            <a href="#register" class="cta-button">지금 참가신청</a>
+            <h1 data-ko='"AI Native Campus"' data-en='"AI Native Campus"'>"AI Native Campus" </h1>
+            <p data-ko="서울대학교 제1회 생성형AI 활용 경진대회에 오신 것을 환영합니다." data-en="Welcome to Seoul National University's 1st Generative AI Competition.">서울대학교 제1회 생성형AI 활용 경진대회에 오신 것을 환영합니다.</p>
+            <a href="#register" class="cta-button" data-ko="지금 기획서 접수" data-en="Submit Proposal Now">지금 기획서 접수</a>
         </div>
     </section>
 
     <section id="about" class="section">
         <div class="container">
-            <h2>대회 소개</h2>
+            <h2 data-ko="대회 소개" data-en="About the Competition">대회 소개</h2>
             <div class="info-grid">
                 <div class="info-card">
-                    <h3>🎯 대회 목적</h3>
-                    <p>서울대학교 학생들의 프로그래밍 실력 향상과 알고리즘 문제해결 능력 증진을 위한 권위있는 경진대회입니다.</p>
+                    <h3 data-ko="🎯 대회 목적" data-en="🎯 Competition Purpose">🎯 대회 목적</h3>
+                    <p data-ko="구성원이 함께 생성형 AI 기술을 활용하는 문화를 조성하고 창의적 아이디어와 혁신적 해결 방식을 발굴" data-en="To foster a culture of utilizing generative AI technology together and discover creative ideas and innovative solutions">구성원이 함께 생성형 AI 기술을 활용하는 문화를 조성하고 창의적 아이디어와 혁신적 해결 방식을 발굴</p>
                 </div>
                 <div class="info-card">
-                    <h3>👥 참가 대상</h3>
-                    <p>서울대학교 재학생 및 대학원생 (개인 또는 팀 참가 가능, 팀은 최대 3명)</p>
+                    <h3 data-ko="👥 참가 대상" data-en="👥 Participants">👥 참가 대상</h3>
+                    <p data-ko="서울대 교직원 및 학생(팀당 4인 이내)" data-en="SNU faculty and students (max 4 members per team)">서울대 교직원 및 학생(팀당 4인 이내)</p>
                 </div>
                 <div class="info-card">
-                    <h3>⏰ 대회 시간</h3>
-                    <p>2024년 11월 16일 (토) 13:00 - 18:00 (5시간)</p>
+                    <h3 data-ko="⏰ 기획서 접수 기간" data-en="⏰ Proposal Submission Period">⏰ 기획서 접수 기간</h3>
+                    <p data-ko="2025년 10월 20일 (월) ~ 10월 24일 (금)" data-en="October 20 (Mon) ~ October 24 (Fri), 2025">2025년 10월 20일 (월) ~ 10월 24일 (금)</p>
                 </div>
                 <div class="info-card">
-                    <h3>📍 대회 장소</h3>
-                    <p>서울대학교 컴퓨터공학부 301동 컴퓨터실</p>
+                    <h3 data-ko="📍주제" data-en="📍Theme">📍주제</h3>
+                    <p data-ko="생생성형 AI 기술을 활용하여 서울대학교 현안(교육, 연구, 행정)을 해결하고 발전에 기여할 수 있는 자유주제" data-en="Free theme utilizing generative AI technology to solve SNU's current issues (education, research, administration) and contribute to development">생생성형 AI 기술을 활용하여 서울대학교 현안(교육, 연구, 행정)을 해결하고 발전에 기여할 수 있는 자유주제</p>
                 </div>
                 <div class="info-card">
-                    <h3>💻 사용 언어</h3>
-                    <p>C, C++, Java, Python, Kotlin, Go 등 다양한 프로그래밍 언어 지원</p>
+                    <h3 data-ko="💻 진행 절차" data-en="💻 Process">💻 진행 절차</h3>
+                    <p data-ko="1. 기획서 접수<br>
+                    2. 기획서 평가 → 본선 진출팀 선발<br>
+                    3. 선발팀은 AI 서비스 개발<br>
+                    ※ 협력기업 멘토링 하에 진행<br>
+                    4. 최종 발표<br>
+                    5. 평가 및 시상" data-en="1. Proposal Submission<br>
+                    2. Proposal Evaluation → Finalist Selection<br>
+                    3. Selected teams develop AI services<br>
+                    ※ With corporate mentoring<br>
+                    4. Final Presentation<br>
+                    5. Evaluation and Awards">1. 기획서 접수<br>
+                    2. 기획서 평가 → 본선 진출팀 선발<br>
+                    3. 선발팀은 AI 서비스 개발<br>
+                    ※ 협력기업 멘토링 하에 진행<br>
+                    4. 최종 발표<br>
+                    5. 평가 및 시상</p>
                 </div>
                 <div class="info-card">
-                    <h3>📊 문제 구성</h3>
-                    <p>알고리즘, 자료구조, 수학 등 다양한 분야의 8-12문제 출제</p>
+                    <h3 data-ko="📊 참가 방법" data-en="📊 How to Participate">📊 참가 방법</h3>
+                    <p data-ko="주제, 문제 현안, 아이디어 제안 내용<br>
+                        구현 방안, 예상 결과물 등을 기재하여 <br> 온라인으로 <a href='#register' style='color: #0F0F70; text-decoration: underline; font-weight: bold;'>참가</a>" data-en="Submit online with details on theme, current issues, proposed ideas,<br>
+                        implementation plan, expected outcomes, etc.<br>
+                        <a href='#register' style='color: #0F0F70; text-decoration: underline; font-weight: bold;'>Participate</a>">주제, 문제 현안, 아이디어 제안 내용<br>
+                        구현 방안, 예상 결과물 등을 기재하여 <br> 온라인으로 <a href="#register" style="color: #0F0F70; text-decoration: underline; font-weight: bold;">참가</a></p>
                 </div>
             </div>
         </div>
@@ -492,83 +468,169 @@
 
     <section id="schedule" class="section">
         <div class="container">
-            <h2>대회 일정</h2>
-            <div class="timeline">
-                <div class="timeline-item">
+            <h2 data-ko="대회 일정" data-en="Competition Schedule">대회 일정</h2>
+            <ul class="timeline">
+                <li class="timeline-item">
                     <div class="timeline-content">
-                        <h3>참가신청 마감</h3>
-                        <p>2024년 11월 10일 (일) 23:59</p>
+                        <h3 data-ko="(예선) 아이디어 기획 접수" data-en="(Preliminary) Proposal Submission">(예선) 아이디어 기획 접수</h3>
+                        <p data-ko="2025. 10. 20.(월) ~ 10. 24.(금) 23:59" data-en="Oct 20 (Mon) ~ Oct 24 (Fri) 23:59, 2025">2025. 10. 20.(월) ~ 10. 24.(금) 23:59</p>
                     </div>
-                </div>
-                <div class="timeline-item">
+                </li>
+                <li class="timeline-item">
                     <div class="timeline-content">
-                        <h3>참가자 확정 발표</h3>
-                        <p>2024년 11월 12일 (화) 18:00</p>
+                        <h3 data-ko="본선 진출자 발표" data-en="Finalist Announcement">본선 진출자 발표</h3>
+                        <p data-ko="2025. 10. 31. (금)" data-en="October 31 (Fri), 2025">2025. 10. 31. (금)</p>
                     </div>
-                </div>
-                <div class="timeline-item">
+                </li>
+                <li class="timeline-item">
                     <div class="timeline-content">
-                        <h3>대회 당일 등록</h3>
-                        <p>2024년 11월 16일 (토) 12:00 - 12:50</p>
+                        <h3 data-ko="AI 서비스 개발 사전교육" data-en="AI Service Development Pre-training">AI 서비스 개발 사전교육</h3>
+                        <p data-ko=" 2025.11. 3.(월) (온/오프라인 동시 진행)" data-en="November 3 (Mon), 2025 (Online/Offline)"> 2025.11. 3.(월) (온/오프라인 동시 진행)</p>
                     </div>
-                </div>
-                <div class="timeline-item">
+                </li>
+                <li class="timeline-item">
                     <div class="timeline-content">
-                        <h3>대회 진행</h3>
-                        <p>2024년 11월 16일 (토) 13:00 - 18:00</p>
+                        <h3 data-ko="(본선) AI 서비스 개발" data-en="(Final) AI Service Development">(본선) AI 서비스 개발</h3>
+                        <p data-ko="2025. 11. 3.(월) ~ 11. 23.(일) 23:59" data-en="November 3 (Mon) ~ November 23 (Sun) 23:59, 2025">2025. 11. 3.(월) ~ 11. 23.(일) 23:59</p>
                     </div>
-                </div>
-                <div class="timeline-item">
+                </li>
+                <li class="timeline-item">
                     <div class="timeline-content">
-                        <h3>결과 발표 및 시상식</h3>
-                        <p>2024년 11월 16일 (토) 18:30</p>
+                        <h3 data-ko="발표 평가" data-en="Presentation Evaluation">발표 평가</h3>
+                        <p data-ko="2025. 11. 25. (화)" data-en="November 25 (Tue), 2025">2025. 11. 25. (화)</p>
                     </div>
-                </div>
-            </div>
+                </li>
+                <li class="timeline-item">
+                    <div class="timeline-content">
+                        <h3 data-ko="최종 수상자 발표" data-en="Final Winners Announcement">최종 수상자 발표</h3>
+                        <p data-ko="2025. 12. 5. (금) (시상일 별도 공지)" data-en="December 5 (Fri), 2025 (Award ceremony date TBA)">2025. 12. 5. (금) (시상일 별도 공지)</p>
+                    </div>
+                </li>
+            </ul>
         </div>
     </section>
 
     <section id="prizes" class="section">
         <div class="container">
-            <h2>시상 내역</h2>
+            <h2 data-ko="시상 내역" data-en="Awards">시상 내역</h2>
             <div class="prizes">
                 <div class="prize-card">
-                    <h3>🥇 1등</h3>
-                    <div class="amount">100만원</div>
-                    <p>상금 + 총장상</p>
+                    <h4 data-ko="🥇 대상" data-en="🥇 Grand Prize">🥇 대상</h4>
+                    <h5 data-ko="1팀" data-en="1 Team">1팀</h5>
+                    <div class="amount" data-ko="500만원" data-en="5,000,000 KRW">500만원</div>
+                    <p data-ko="상금 + 총장상" data-en="Prize + President Award">상금 + 총장상</p>
                 </div>
                 <div class="prize-card">
-                    <h3>🥈 2등</h3>
-                    <div class="amount">50만원</div>
-                    <p>상금 + 부총장상</p>
+                    <h4 data-ko="🥈 최우수상" data-en="🥈 Excellence Award">🥈 최우수상</h4>
+                    <h5 data-ko="2팀" data-en="2 Teams">2팀</h5>
+                    <div class="amount" data-ko="300만원" data-en="3,000,000 KRW">300만원</div>
+                    <p data-ko="상금 + 총장상" data-en="Prize + President Award">상금 + 총장상</p>
                 </div>
                 <div class="prize-card">
-                    <h3>🥉 3등</h3>
-                    <div class="amount">30만원</div>
-                    <p>상금 + 학과장상</p>
+                    <h4 data-ko="🥉 우수상" data-en="🥉 Merit Award">🥉 우수상</h4>
+                    <h5 data-ko="4팀" data-en="4 Teams">4팀</h5>
+                    <div class="amount" data-ko="200만원" data-en="2,000,000 KRW">200만원</div>
+                    <p data-ko="상금 + 총장상" data-en="Prize + President Award">상금 + 총장상</p>
+                </div>
+                <div class="prize-card">
+                    <h4 data-ko="🏆 특별상" data-en="🏆 Special Award">🏆 특별상</h4>
+                    <h5 data-ko="2팀" data-en="2 Teams">2팀</h5>
+                    <div class="amount" data-ko="200만원" data-en="2,000,000 KRW">200만원</div>
+                    <p data-ko="상금 + 협력기업 대표상" data-en="Prize + Corporate Partner Award">상금 + 협력기업 대표상</p>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 2rem; color: rgba(255, 255, 255, 0.8);">
-                <p>* 추가로 우수상, 장려상, 특별상 등 다양한 상이 준비되어 있습니다.</p>
+            <div style="text-align: center; margin-top: 2rem; color: #555;">
+                <p data-ko="*  본선 참가팀 (최종 발표 참여자 전원): 팀당 30만원 상당의 개발지원비 및 현업 전문가 멘토링을 제공합니다" data-en="* Finalist teams (all final presentation participants): Development support funds worth 300,000 KRW per team and mentoring by industry experts will be provided">*  본선 참가팀 (최종 발표 참여자 전원): 팀당 30만원 상당의 개발지원비 및 현업 전문가 멘토링을 제공합니다</p>
+                <p data-ko="경진대회 참가자 전원: 비교과 활동 인증서가 제공됩니다" data-en="All competition participants: Extracurricular activity certificates will be provided">경진대회 참가자 전원: 비교과 활동 인증서가 제공됩니다</p>
             </div>
         </div>
     </section>
 
     <section id="register" class="section">
         <div class="container">
-            <h2>참가 신청</h2>
-            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-                <div class="info-card">
-                    <h3>📝 신청 방법</h3>
-                    <p>아래 링크를 통해 온라인으로 신청하실 수 있습니다.</p>
-                    <br>
-                    <a href="#" class="cta-button" style="display: inline-block;">참가신청 바로가기</a>
-                    <br><br>
-                    <p style="font-size: 0.9rem; opacity: 0.8;">
-                        신청 시 학번, 성명, 연락처, 팀 구성 정보가 필요합니다.<br>
-                        개인 참가도 가능하며, 팀 참가 시 팀장이 대표로 신청해주세요.
-                    </p>
+            <h2 data-ko="참가 신청" data-en="Registration">참가 신청</h2>
+            <div class="info-card">
+                <h3 data-ko="📝 신청 방법" data-en="📝 How to Apply">📝 신청 방법</h3>
+                <p data-ko="아래 링크를 통해 온라인으로 신청하실 수 있습니다." data-en="You can apply online through the link below.">아래 링크를 통해 온라인으로 신청하실 수 있습니다.</p>
+                <br>
+                <a href="#" class="cta-button" style="background: #0F0F70; color: #fff;" data-ko="참가신청 바로가기" data-en="Apply Now">참가신청 바로가기</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section">
+        <div class="container">
+            <h2 data-ko="자주 묻는 질문" data-en="Frequently Asked Questions">자주 묻는 질문</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3 data-ko="Q. 팀 구성은 어떻게 하나요?" data-en="Q. How do I form a team?">Q. 팀 구성은 어떻게 하나요?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-ko="팀당 최대 4명까지 구성 가능하며, 개인 참가도 가능합니다. 팀 구성은 자유롭게 하시면 됩니다." data-en="You can form teams of up to 4 members, and individual participation is also possible. Team formation is flexible.">팀당 최대 4명까지 구성 가능하며, 개인 참가도 가능합니다. 팀 구성은 자유롭게 하시면 됩니다.</p>
+                    </div>
                 </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3 data-ko="Q. 어떤 AI 도구를 사용할 수 있나요?" data-en="Q. What AI tools can I use?">Q. 어떤 AI 도구를 사용할 수 있나요?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-ko="스누AIChat, 후원기업이 제공하는 마인드로직 인포미, 네이버 클로버 스튜디오는 무상으로 이용이 가능합니다.
+                        이 외에도 ChatGPT, Gemini, Claude, Cursor 등 다양한 생성형 AI 도구를 자유롭게 활용하실 수 있으며 팀당 30만원 개발지원비 한도에서 지원됩니다." 
+                        data-en="YSNU AI Chat, MindLogic InforMe provided by sponsoring companies, and Naver CLOVA Studio are available for free use.
+                        In addition, various generative AI tools such as ChatGPT, Gemini, Claude, and Cursor can be freely utilized, and development support of up to 300,000 KRW per team is available within the support budget.">
+                        스누AIChat, 후원기업이 제공하는 마인드로직 인포미, 네이버 클로버 스튜디오는 무상으로 이용이 가능합니다.
+                        이 외에도 ChatGPT, Gemini, Claude, Cursor 등 다양한 생성형 AI 도구를 자유롭게 활용하실 수 있으며 팀당 30만원 개발지원비 한도에서 지원됩니다.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3 data-ko="Q. 개발 경험이 없어도 참가할 수 있나요?" data-en="Q. Can I participate without development experience?">Q. 개발 경험이 없어도 참가할 수 있나요?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-ko="네, 가능합니다. AI 도구를 활용한 아이디어 구현이 주목적이므로 개발 경험보다는 창의적 아이디어가 중요합니다." data-en="Yes, you can. The main goal is to implement ideas using AI tools, so creative ideas are more important than development experience.">네, 가능합니다. AI 도구를 활용한 아이디어 구현이 주목적이므로 개발 경험보다는 창의적 아이디어가 중요합니다.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3 data-ko="Q. 참가비가 있나요?" data-en="Q. Is there a participation fee?">Q. 참가비가 있나요?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-ko="참가비는 무료입니다. 본선 진출팀에게는 개발지원비와 멘토링이 제공됩니다." data-en="Participation is free. Finalist teams will receive development support funds and mentoring.">참가비는 무료입니다. 본선 진출팀에게는 개발지원비와 멘토링이 제공됩니다.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3 data-ko="Q. 결과물은 어떤 형태로 제출하나요?" data-en="Q. In what format should I submit the results?">Q. 결과물은 어떤 형태로 제출하나요?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-ko="웹 서비스, 모바일 앱, 데모 영상 등 다양한 형태로 제출 가능합니다. 창의적인 결과물을 환영합니다." data-en="You can submit in various formats such as web services, mobile apps, demo videos, etc. Creative results are welcome.">웹 서비스, 모바일 앱, 데모 영상 등 다양한 형태로 제출 가능합니다. 창의적인 결과물을 환영합니다.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3 data-ko="Q. 심사 기준은 무엇인가요?" data-en="Q. What are the evaluation criteria?">Q. 심사 기준은 무엇인가요?</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-ko="아이디어의 창의성, AI 활용도, 실현 가능성, 파급효과 등을 종합적으로 평가합니다." data-en="We comprehensively evaluate creativity of ideas, AI utilization, feasibility, and impact.">아이디어의 창의성, AI 활용도, 실현 가능성, 파급효과 등을 종합적으로 평가합니다.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 패들릿 Q&A 섹션 -->
+            <div class="padlet-section">
+                <h3 style="text-align: center; margin: 3rem 0 2rem 0; color: #0F0F70; font-size: 1.8rem;">실시간 Q&A</h3>
+                <p style="text-align: center; margin-bottom: 2rem; color: #666; font-size: 1.1rem;">
+                    궁금한 점이 있으시면 아래 패들릿에 질문을 남겨주세요. 실시간으로 답변드리겠습니다.
+                </p>
+                <!-- 패들릿 임베드 코드 -->
+                <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/bgkpxzb5sznkkaaf" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p><div style="display:flex;align-items:center;justify-content:end;margin:0;height:28px"><a href="https://padlet.com?ref=embed" style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none" target="_blank"><div style="display:flex;align-items:center;"><img src="https://padlet.net/embeds/made_with_padlet_2022.png" width="114" height="28" style="padding:0;margin:0;background:0 0;border:none;box-shadow:none" alt="Padlet으로 만듦"></div></a></div></div>
             </div>
         </div>
     </section>
@@ -577,70 +639,109 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>주최</h3>
-                    <p>서울대학교 컴퓨터공학부<br>프로그래밍 동아리 연합</p>
+                    <h3 data-ko="주최" data-en="Organizer">주최</h3>
+                    <p data-ko="서울대학교 정보화본부" data-en="Seoul National University Information Technology Services">서울대학교 정보화본부</p>
                 </div>
                 <div class="footer-section">
-                    <h3>후원</h3>
-                    <p>서울대학교<br>삼성전자<br>네이버</p>
+                    <h3 data-ko="후원" data-en="Sponsors">후원</h3>
+                    <p data-ko="네이버클라우드<br>마인드로직" data-en="Naver Cloud Platform<br>MindLogic">네이버클라우드<br>마인드로직</p>
                 </div>
                 <div class="footer-section">
-                    <h3>문의사항</h3>
+                    <h3 data-ko="문의사항" data-en="Contact">문의사항</h3>
                     <ul class="contact-info">
-                        <li>📧 contest@snu.ac.kr</li>
-                        <li>📞 02-880-1234</li>
-                        <li>🏫 서울대학교 301동 313호</li>
+                        <li>📧 snudata@snu.ac.kr</li>
+                        <li>📞 02-880-8282</li>
+                        <li data-ko="🏫 서울대학교 정보화본부(102동)" data-en="🏫 SNU Information Technology Services (Building 102)">🏫 서울대학교 정보화본부(102동)</li>
                     </ul>
                 </div>
             </div>
-            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 2rem; margin-top: 2rem;">
-                <p>&copy; 2024 서울대학교 프로그래밍 경진대회. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p data-ko="&copy; 2025 AI Native Campus - 서울대학교 제1회 생성형AI 경진대회. All rights reserved." data-en="&copy; 2025 AI Native Campus - Seoul National University 1st Generative AI Competition. All rights reserved.">&copy; 2025 AI Native Campus - 서울대학교 제1회 생성형AI 경진대회. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // 스크롤 시 헤더 스타일 변경
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-                header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.15)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-            }
+        const navToggle = document.querySelector('.nav-toggle');
+        const body = document.body;
+
+        navToggle.addEventListener('click', () => {
+            body.classList.toggle('nav-open');
         });
 
-        // 부드러운 스크롤
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', () => {
+                if (body.classList.contains('nav-open')) {
+                    body.classList.remove('nav-open');
+                }
+            });
+        });
+
+        // Simple script for smooth scroll, can be expanded later
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                        behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // 카드 호버 효과 개선
-        document.querySelectorAll('.info-card, .prize-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const answer = faqItem.querySelector('.faq-answer');
+                const toggle = this.querySelector('.faq-toggle');
+                
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem) {
+                        item.classList.remove('active');
+                        item.querySelector('.faq-answer').classList.remove('active');
+                        item.querySelector('.faq-toggle').textContent = '+';
+                    }
+                });
+                
+                // Toggle current FAQ item
+                faqItem.classList.toggle('active');
+                answer.classList.toggle('active');
+                
+                if (faqItem.classList.contains('active')) {
+                    toggle.textContent = '−';
+                } else {
+                    toggle.textContent = '+';
+                }
             });
         });
 
-        // 페이지 로드 시 애니메이션
-        window.addEventListener('load', function() {
-            document.body.style.animation = 'fadeInUp 1s ease';
-        });
+        // Language toggle functionality
+        function changeLanguage(lang) {
+            // Update active button
+            document.querySelectorAll('.language-toggle button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('lang-' + lang).classList.add('active');
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-ko][data-en]').forEach(element => {
+                if (lang === 'ko') {
+                    element.innerHTML = element.getAttribute('data-ko');
+                } else {
+                    element.innerHTML = element.getAttribute('data-en');
+                }
+            });
+            
+            // Store language preference
+            localStorage.setItem('preferred-language', lang);
+        }
+
+        // Load saved language preference
+        const savedLang = localStorage.getItem('preferred-language') || 'ko';
+        changeLanguage(savedLang);
     </script>
 </body>
 </html>
